@@ -1,0 +1,180 @@
+{% stylesheet %}
+  .header-wrapper {
+    background: var(--color-dark-bg);
+    border-bottom: 1px solid var(--color-accent-gold);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    background: rgba(26, 26, 26, 0.95);
+  }
+  
+  .header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header-logo {
+    font-family: var(--font-serif-display);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--color-accent-gold);
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+  }
+  
+  .header-logo:hover {
+    color: var(--color-accent-rose);
+    text-shadow: 0 0 10px rgba(139, 69, 19, 0.5);
+  }
+  
+  .header-nav {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .header-nav a {
+    color: var(--color-text-light);
+    text-decoration: none;
+    font-family: var(--font-serif-body);
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .header-nav a:hover,
+  .header-nav a:focus {
+    color: var(--color-accent-gold);
+    outline: none;
+  }
+  
+  .header-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--color-accent-gold);
+    transition: width 0.3s ease;
+  }
+  
+  .header-nav a:hover::after,
+  .header-nav a:focus::after {
+    width: 100%;
+  }
+  
+  .header-icons {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  
+  .header-icon-btn {
+    background: none;
+    border: none;
+    color: var(--color-accent-gold);
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    padding: 0.5rem;
+  }
+  
+  .header-icon-btn:hover {
+    color: var(--color-accent-rose);
+    transform: scale(1.1);
+  }
+  
+  .cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--color-accent-rose);
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: bold;
+  }
+  
+  .mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 0.4rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+  
+  .mobile-menu-toggle span {
+    width: 24px;
+    height: 2px;
+    background: var(--color-accent-gold);
+    transition: all 0.3s ease;
+  }
+  
+  @media (max-width: 768px) {
+    .header-nav {
+      display: none;
+    }
+    
+    .mobile-menu-toggle {
+      display: flex;
+    }
+    
+    .header-logo {
+      font-size: 1.4rem;
+    }
+  }
+{% endstylesheet %}
+
+<header class="header-wrapper">
+  <div class="header-container">
+    <a href="{{ routes.root_url }}" class="header-logo">{{ shop.name }}</a>
+    
+    <nav>
+      <ul class="header-nav">
+        <li><a href="{{ routes.all_products_collection_url }}">Shop</a></li>
+        <li><a href="{{ routes.collections_url }}/ritual-boxes">Ritual Boxes</a></li>
+        <li><a href="#threshold-finder">Find Your Threshold</a></li>
+        <li><a href="{{ routes.collections_url }}/private-support">Private Support</a></li>
+        <li><a href="{{ routes.blogs_url }}/journal">Journal</a></li>
+        <li><a href="{{ routes.pages_url }}/about">About</a></li>
+      </ul>
+    </nav>
+    
+    <div class="header-icons">
+      <a href="{{ routes.search_url }}" class="header-icon-btn" aria-label="Search">
+        <span>🔍</span>
+      </a>
+      <a href="{{ routes.account_url }}" class="header-icon-btn" aria-label="Account">
+        <span>👤</span>
+      </a>
+      <a href="{{ routes.cart_url }}" class="header-icon-btn" aria-label="Cart">
+        <span>🛍️</span>
+        {% if cart.item_count > 0 %}
+          <span class="cart-count">{{ cart.item_count }}</span>
+        {% endif %}
+      </a>
+      <button class="mobile-menu-toggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
