@@ -1,0 +1,200 @@
+{% stylesheet %}
+  .collage-portals-wrapper {
+    background: var(--color-dark-bg);
+    padding: var(--spacing-3xl) var(--spacing-lg);
+  }
+  
+  .collage-portals-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .collage-portals-title {
+    font-size: 2.5rem;
+    text-align: center;
+    color: var(--color-accent-gold);
+    margin-bottom: var(--spacing-3xl);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .portals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-xl);
+  }
+  
+  .portal-card {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-blackened-plum);
+    border: 2px solid var(--color-accent-gold);
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    text-decoration: none;
+    color: inherit;
+    padding: var(--spacing-lg);
+  }
+  
+  .portal-card-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+    transition: opacity var(--transition-base), transform var(--transition-slow);
+  }
+  
+  .portal-card:hover .portal-card-image {
+    opacity: 0.5;
+    transform: scale(1.05);
+  }
+  
+  .portal-card-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+  
+  .portal-card-symbol {
+    font-size: 2.5rem;
+    color: var(--color-accent-gold);
+    transition: all var(--transition-base);
+  }
+  
+  .portal-card:hover .portal-card-symbol {
+    transform: scale(1.2) rotate(5deg);
+  }
+  
+  .portal-card-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--color-candle-cream);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .portal-card-text {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    line-height: 1.6;
+  }
+  
+  /* Hover Effects */
+  .portal-card:hover {
+    border-color: var(--color-dark-rose);
+    box-shadow: 0 0 30px rgba(184, 134, 11, 0.4), inset 0 0 30px rgba(139, 69, 69, 0.2);
+    transform: translateY(-5px);
+  }
+  
+  @media (max-width: 768px) {
+    .collage-portals-wrapper {
+      padding: var(--spacing-2xl) var(--spacing-lg);
+    }
+    
+    .collage-portals-title {
+      font-size: 1.8rem;
+      margin-bottom: var(--spacing-2xl);
+    }
+    
+    .portals-grid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Collage Category Portals",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Journey Through the Apothecary"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "portal",
+      "name": "Portal Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Grief & Remembrance"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Background Image"
+        },
+        {
+          "type": "text",
+          "id": "symbol",
+          "label": "Symbol/Emoji",
+          "default": "🕯️"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collage Category Portals",
+      "blocks": [
+        {"type": "portal"},
+        {"type": "portal"},
+        {"type": "portal"}
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<div class="collage-portals-wrapper">
+  <div class="collage-portals-container">
+    <h2 class="collage-portals-title">{{ section.settings.section_title }}</h2>
+    
+    <div class="portals-grid">
+      {% for block in section.blocks %}
+        <a href="{{ block.settings.link | default: '#' }}" class="portal-card" {% if block.settings.image %}style="background-color: var(--color-tobacco-brown);"{% endif %}>
+          {% if block.settings.image %}
+            <img src="{{ block.settings.image | img_url: '400x400' }}" alt="{{ block.settings.title }}" class="portal-card-image">
+          {% endif %}
+          
+          <div class="portal-card-content">
+            {% if block.settings.symbol %}
+              <div class="portal-card-symbol">{{ block.settings.symbol }}</div>
+            {% endif %}
+            <h3 class="portal-card-title">{{ block.settings.title }}</h3>
+            {% if block.settings.description %}
+              <p class="portal-card-text">{{ block.settings.description }}</p>
+            {% endif %}
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
