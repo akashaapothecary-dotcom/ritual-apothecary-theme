@@ -1,0 +1,182 @@
+{% stylesheet %}
+  .apothecary-journal-wrapper {
+    background: var(--color-dark-bg);
+    padding: var(--spacing-3xl) var(--spacing-lg);
+    border-top: 2px solid var(--color-accent-gold);
+  }
+  
+  .apothecary-journal-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .apothecary-journal-title {
+    font-size: 2.5rem;
+    text-align: center;
+    color: var(--color-accent-gold);
+    margin-bottom: var(--spacing-lg);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .journal-subtitle {
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-3xl);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .journal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-2xl);
+  }
+  
+  .journal-card {
+    background: var(--color-blackened-plum);
+    border: 2px solid var(--color-dark-rose);
+    padding: var(--spacing-lg);
+    transition: all var(--transition-base);
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .journal-card:hover {
+    border-color: var(--color-accent-gold);
+    box-shadow: 0 0 25px rgba(184, 134, 11, 0.3);
+    transform: translateY(-5px);
+  }
+  
+  .journal-category {
+    font-size: 0.8rem;
+    color: var(--color-accent-gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .journal-title {
+    font-size: 1.3rem;
+    color: var(--color-candle-cream);
+    margin-bottom: var(--spacing-md);
+    font-weight: 600;
+  }
+  
+  .journal-excerpt {
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+    line-height: 1.6;
+    flex-grow: 1;
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .journal-date {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+  
+  .journal-cta {
+    text-align: center;
+  }
+  
+  .journal-cta-button {
+    background: var(--color-accent-gold);
+    color: var(--color-dark-bg);
+    padding: var(--spacing-md) var(--spacing-2xl);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-base);
+  }
+  
+  .journal-cta-button:hover {
+    background: var(--color-accent-rose);
+  }
+  
+  @media (max-width: 768px) {
+    .apothecary-journal-wrapper {
+      padding: var(--spacing-2xl) var(--spacing-lg);
+    }
+    
+    .apothecary-journal-title {
+      font-size: 1.8rem;
+    }
+    
+    .journal-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Apothecary Journal",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Letters from the Threshold"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Reflections on ritual, grief, ceremony, plant wisdom, and the sacred thresholds of becoming."
+    },
+    {
+      "type": "url",
+      "id": "view_all_url",
+      "label": "View All Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Apothecary Journal"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="apothecary-journal-wrapper">
+  <div class="apothecary-journal-container">
+    <h2 class="apothecary-journal-title">{{ section.settings.title }}</h2>
+    <p class="journal-subtitle">{{ section.settings.subtitle }}</p>
+    
+    <div class="journal-grid">
+      <a href="#" class="journal-card">
+        <p class="journal-category">Grief Notes</p>
+        <h3 class="journal-title">Tending the Unbearable</h3>
+        <p class="journal-excerpt">What it means to move through grief as a practice of remembrance and return. Notes on holding space for the unspeakable.</p>
+        <p class="journal-date">June 2026</p>
+      </a>
+      
+      <a href="#" class="journal-card">
+        <p class="journal-category">Ritual Practices</p>
+        <h3 class="journal-title">A Simple Threshold Ceremony</h3>
+        <p class="journal-excerpt">A gentle ritual for marking transitions. Using everyday objects and plants to honor the passage from one season to the next.</p>
+        <p class="journal-date">May 2026</p>
+      </a>
+      
+      <a href="#" class="journal-card">
+        <p class="journal-category">Plant Teachings</p>
+        <h3 class="journal-title">Mugwort as Memory Keeper</h3>
+        <p class="journal-excerpt">Deep herbalism. How mugwort holds the threshold between the waking and dreaming, and what she teaches us about integration.</p>
+        <p class="journal-date">April 2026</p>
+      </a>
+    </div>
+    
+    <div class="journal-cta">
+      <a href="{{ section.settings.view_all_url | default: '#' }}" class="journal-cta-button">Read All Letters</a>
+    </div>
+  </div>
+</div>

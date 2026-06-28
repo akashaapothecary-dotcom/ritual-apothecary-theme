@@ -1,0 +1,132 @@
+{% stylesheet %}
+  .newsletter-threshold-wrapper {
+    background: linear-gradient(135deg, var(--color-blackened-plum) 0%, var(--color-tobacco-brown) 100%);
+    padding: var(--spacing-3xl) var(--spacing-lg);
+    border: 2px solid var(--color-accent-gold);
+    margin: var(--spacing-3xl) var(--spacing-lg);
+  }
+  
+  .newsletter-threshold-container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .newsletter-title {
+    font-size: 2rem;
+    color: var(--color-accent-gold);
+    margin-bottom: var(--spacing-lg);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .newsletter-copy {
+    font-size: 1rem;
+    color: var(--color-text-light);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .newsletter-form {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .newsletter-form input {
+    flex: 1;
+    background: var(--color-dark-bg);
+    border: 1px solid var(--color-accent-gold);
+    color: var(--color-text-light);
+    padding: var(--spacing-md);
+    font-family: var(--font-serif-body);
+    font-size: 0.95rem;
+  }
+  
+  .newsletter-form input::placeholder {
+    color: var(--color-text-muted);
+  }
+  
+  .newsletter-form button {
+    background: var(--color-accent-gold);
+    color: var(--color-dark-bg);
+    border: none;
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-family: var(--font-serif-body);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all var(--transition-base);
+  }
+  
+  .newsletter-form button:hover {
+    background: var(--color-accent-rose);
+    transform: scale(1.02);
+  }
+  
+  .newsletter-terms {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+  
+  @media (max-width: 768px) {
+    .newsletter-threshold-wrapper {
+      padding: var(--spacing-2xl) var(--spacing-lg);
+      margin: var(--spacing-2xl) 0;
+    }
+    
+    .newsletter-title {
+      font-size: 1.5rem;
+    }
+    
+    .newsletter-form {
+      flex-direction: column;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Newsletter Threshold",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Letters from the Threshold"
+    },
+    {
+      "type": "textarea",
+      "id": "copy",
+      "label": "Copy",
+      "default": "Receive seasonal rituals, grief notes, herbal reflections, product releases, and invitations from the apothecary. A love letter for those moving through thresholds."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Receive Letters"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter Threshold"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="newsletter-threshold-wrapper">
+  <div class="newsletter-threshold-container">
+    <h2 class="newsletter-title">{{ section.settings.title }}</h2>
+    <p class="newsletter-copy">{{ section.settings.copy }}</p>
+    
+    <form class="newsletter-form" method="post" action="/contact#newsletter">
+      <input type="email" name="email" placeholder="Your email address" required aria-label="Email address">
+      <button type="submit">{{ section.settings.button_label }}</button>
+    </form>
+    
+    <p class="newsletter-terms">We respect your privacy. Unsubscribe anytime.</p>
+  </div>
+</div>

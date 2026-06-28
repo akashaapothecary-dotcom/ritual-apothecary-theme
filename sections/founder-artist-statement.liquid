@@ -1,0 +1,137 @@
+{% stylesheet %}
+  .founder-statement-wrapper {
+    background: var(--color-dark-bg);
+    padding: var(--spacing-3xl) var(--spacing-lg);
+  }
+  
+  .founder-statement-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-3xl);
+    align-items: center;
+  }
+  
+  .founder-image {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border: 2px solid var(--color-accent-gold);
+  }
+  
+  .founder-content {
+    padding: var(--spacing-lg);
+  }
+  
+  .founder-title {
+    font-size: 2.2rem;
+    color: var(--color-accent-gold);
+    margin-bottom: var(--spacing-lg);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .founder-text {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-2xl);
+  }
+  
+  .founder-button {
+    background: var(--color-accent-gold);
+    color: var(--color-dark-bg);
+    padding: var(--spacing-md) var(--spacing-2xl);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-base);
+  }
+  
+  .founder-button:hover {
+    background: var(--color-accent-rose);
+    transform: scale(1.05);
+  }
+  
+  @media (max-width: 768px) {
+    .founder-statement-wrapper {
+      padding: var(--spacing-2xl) var(--spacing-lg);
+    }
+    
+    .founder-statement-container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-2xl);
+    }
+    
+    .founder-title {
+      font-size: 1.6rem;
+    }
+    
+    .founder-text {
+      font-size: 0.95rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Founder Artist Statement",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "From the Hands of the Ritualist"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Content",
+      "default": "I create ritual apothecary offerings for the moments when life becomes a doorway. My work lives where folk herbalism, grief tending, ceremony, ancestral memory, body wisdom, and beauty meet. These pieces are made for those who are grieving, becoming, remembering, integrating, softening, and returning to themselves."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Founder Image"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Meet the Founder"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Founder Artist Statement"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="founder-statement-wrapper">
+  <div class="founder-statement-container">
+    {% if section.settings.image %}
+      <img src="{{ section.settings.image | img_url: '500x500' }}" alt="Founder" class="founder-image">
+    {% else %}
+      <div style="background: var(--color-blackened-plum); border: 2px solid var(--color-accent-gold); aspect-ratio: 1; display: flex; align-items: center; justify-content: center; color: var(--color-text-muted);">Image placeholder</div>
+    {% endif %}
+    
+    <div class="founder-content">
+      <h2 class="founder-title">{{ section.settings.title }}</h2>
+      <p class="founder-text">{{ section.settings.content }}</p>
+      {% if section.settings.button_label %}
+        <a href="{{ section.settings.button_url | default: '#' }}" class="founder-button">{{ section.settings.button_label }}</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
