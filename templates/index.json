@@ -1,0 +1,11 @@
+{% stylesheet %}
+  .home-page-wrapper {
+    background: var(--color-dark-bg);
+  }
+{% endstylesheet %}
+
+<div class="home-page-wrapper">
+  {% for section in sections %}
+    {% section section %}
+  {% endfor %}
+</div>

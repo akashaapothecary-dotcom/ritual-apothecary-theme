@@ -1,0 +1,9 @@
+{% stylesheet %}
+  .collection-page-wrapper {
+    background: var(--color-dark-bg);
+  }
+{% endstylesheet %}
+
+<div class="collection-page-wrapper">
+  {% section 'main-collection-product-grid' %}
+</div>

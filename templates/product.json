@@ -1,0 +1,14 @@
+{% stylesheet %}
+  .product-page-wrapper {
+    background: var(--color-dark-bg);
+  }
+{% endstylesheet %}
+
+<div class="product-page-wrapper">
+  {% section 'main-product' %}
+  
+  <div style="background: var(--color-dark-bg); padding: var(--spacing-3xl) var(--spacing-lg); text-align: center;">
+    <h2 style="color: var(--color-accent-gold); margin-bottom: var(--spacing-2xl);">More from the Apothecary</h2>
+    {% section 'featured-ritual-products' %}
+  </div>
+</div>

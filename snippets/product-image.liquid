@@ -1,0 +1,22 @@
+{% stylesheet %}
+  .product-image-wrapper {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .product-image {
+    width: 100%;
+    display: block;
+    transition: transform var(--transition-slow);
+  }
+  
+  .product-image-wrapper:hover .product-image {
+    transform: scale(1.05);
+  }
+{% endstylesheet %}
+
+<div class="product-image-wrapper">
+  {% if image %}
+    <img src="{{ image | img_url: size }}" alt="{{ image.alt }}" class="product-image">
+  {% endif %}
+</div>

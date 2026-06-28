@@ -1,0 +1,9 @@
+{% stylesheet %}
+  .page-wrapper {
+    background: var(--color-dark-bg);
+  }
+{% endstylesheet %}
+
+<div class="page-wrapper">
+  {% section 'page-content' %}
+</div>
