@@ -141,3 +141,11 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+# Shopify CLI / local theme development
+.shopify/
+
+# Mac system files
+.DS_Store
+
+# Packaged Shopify theme zip files
+*.zip
