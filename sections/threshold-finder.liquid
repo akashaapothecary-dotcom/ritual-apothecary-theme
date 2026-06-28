@@ -1,0 +1,189 @@
+{% stylesheet %}
+  .threshold-finder-wrapper {
+    background: var(--color-darker-bg);
+    padding: var(--spacing-3xl) var(--spacing-lg);
+    border-top: 2px solid var(--color-accent-gold);
+    border-bottom: 2px solid var(--color-accent-gold);
+  }
+  
+  .threshold-finder-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .threshold-finder-title {
+    font-size: 2.5rem;
+    text-align: center;
+    color: var(--color-accent-gold);
+    margin-bottom: var(--spacing-3xl);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .threshold-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+  }
+  
+  .threshold-card {
+    background: var(--color-blackened-plum);
+    border: 2px solid var(--color-dark-rose);
+    padding: var(--spacing-xl);
+    transition: all var(--transition-base);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .threshold-card:hover {
+    border-color: var(--color-accent-gold);
+    box-shadow: 0 0 25px rgba(184, 134, 11, 0.3), 0 0 25px rgba(139, 69, 69, 0.2);
+    transform: translateY(-5px);
+  }
+  
+  .threshold-card-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .threshold-card-title {
+    font-size: 1.4rem;
+    color: var(--color-candle-cream);
+    margin-bottom: var(--spacing-md);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .threshold-card-description {
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-lg);
+    flex-grow: 1;
+  }
+  
+  .threshold-finder-button {
+    background: var(--color-accent-gold);
+    color: var(--color-dark-bg);
+    border: none;
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-family: var(--font-serif-body);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    align-self: flex-start;
+  }
+  
+  .threshold-finder-button:hover {
+    background: var(--color-accent-rose);
+    transform: scale(1.05);
+  }
+  
+  .threshold-cta-wrapper {
+    text-align: center;
+    margin-top: var(--spacing-3xl);
+  }
+  
+  .threshold-cta-button {
+    background: var(--color-accent-gold);
+    color: var(--color-dark-bg);
+    padding: var(--spacing-md) var(--spacing-2xl);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  
+  .threshold-cta-button:hover {
+    background: var(--color-accent-rose);
+  }
+  
+  @media (max-width: 768px) {
+    .threshold-finder-wrapper {
+      padding: var(--spacing-2xl) var(--spacing-lg);
+    }
+    
+    .threshold-finder-title {
+      font-size: 1.8rem;
+    }
+    
+    .threshold-cards-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Threshold Finder",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "What Threshold Are You In?"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Threshold Finder"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="threshold-finder-wrapper" id="threshold-finder">
+  <div class="threshold-finder-container">
+    <h2 class="threshold-finder-title">{{ section.settings.title }}</h2>
+    
+    <div class="threshold-cards-grid">
+      <div class="threshold-card">
+        <div class="threshold-card-icon">🕊️</div>
+        <h3 class="threshold-card-title">Grief & Loss</h3>
+        <p class="threshold-card-description">For death, heartbreak, endings, rupture, and remembrance. Offerings to hold you through the unbearable and honor what was.</p>
+      </div>
+      
+      <div class="threshold-card">
+        <div class="threshold-card-icon">🌙</div>
+        <h3 class="threshold-card-title">Birth & Postpartum</h3>
+        <p class="threshold-card-description">For the sacred, messy, embodied transformation of becoming. Ritual care for the threshold of new life.</p>
+      </div>
+      
+      <div class="threshold-card">
+        <div class="threshold-card-icon">🌿</div>
+        <h3 class="threshold-card-title">Plant Medicine Integration</h3>
+        <p class="threshold-card-description">For grounding, meaning-making, and nervous system care before or after ceremony and integration.</p>
+      </div>
+      
+      <div class="threshold-card">
+        <div class="threshold-card-icon">🦋</div>
+        <h3 class="threshold-card-title">Identity & Rebirth</h3>
+        <p class="threshold-card-description">For the seasons where the old self no longer fits and the new self is still forming.</p>
+      </div>
+      
+      <div class="threshold-card">
+        <div class="threshold-card-icon">💚</div>
+        <h3 class="threshold-card-title">Survival & Softening</h3>
+        <p class="threshold-card-description">For those returning to the body after years of holding everything together.</p>
+      </div>
+      
+      <div class="threshold-card">
+        <div class="threshold-card-icon">✨</div>
+        <h3 class="threshold-card-title">Ancestral & Spiritual Transformation</h3>
+        <p class="threshold-card-description">For deep remembering, ritual repair, and reconnection with the unseen.</p>
+      </div>
+    </div>
+    
+    <div class="threshold-cta-wrapper">
+      <a href="{{ section.settings.cta_url | default: '#' }}" class="threshold-cta-button">Find Your Support</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,106 @@
+{% stylesheet %}
+  .ritual-objects-wrapper {
+    background: var(--color-blackened-plum);
+    padding: var(--spacing-3xl) var(--spacing-lg);
+    border-top: 2px solid var(--color-accent-gold);
+  }
+  
+  .ritual-objects-container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .ritual-objects-title {
+    font-size: 2.2rem;
+    color: var(--color-accent-gold);
+    margin-bottom: var(--spacing-xl);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .ritual-objects-content {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-2xl);
+  }
+  
+  .ritual-objects-button {
+    background: var(--color-accent-gold);
+    color: var(--color-dark-bg);
+    padding: var(--spacing-md) var(--spacing-2xl);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-base);
+  }
+  
+  .ritual-objects-button:hover {
+    background: var(--color-dark-rose);
+    transform: scale(1.05);
+  }
+  
+  @media (max-width: 768px) {
+    .ritual-objects-wrapper {
+      padding: var(--spacing-2xl) var(--spacing-lg);
+    }
+    
+    .ritual-objects-title {
+      font-size: 1.6rem;
+    }
+    
+    .ritual-objects-content {
+      font-size: 0.95rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Ritual Objects",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Not Just Products. Ritual Objects."
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Content",
+      "default": "These offerings are made as small works of ceremonial care — botanical, sensory, symbolic, and alive with intention. They are meant to be touched, smelled, prayed with, placed on altars, carried through grief, and woven into daily rituals of return."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Shop Ritual Objects"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ritual Objects"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="ritual-objects-wrapper">
+  <div class="ritual-objects-container">
+    <h2 class="ritual-objects-title">{{ section.settings.title }}</h2>
+    <p class="ritual-objects-content">{{ section.settings.content }}</p>
+    {% if section.settings.button_label %}
+      <a href="{{ section.settings.button_url | default: '#' }}" class="ritual-objects-button">{{ section.settings.button_label }}</a>
+    {% endif %}
+  </div>
+</div>

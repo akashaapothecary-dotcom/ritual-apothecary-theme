@@ -1,0 +1,105 @@
+{% stylesheet %}
+  .ritual-philosophy-wrapper {
+    background: var(--color-dark-bg);
+    padding: var(--spacing-3xl) var(--spacing-lg);
+  }
+  
+  .ritual-philosophy-container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .ritual-philosophy-title {
+    font-size: 2.5rem;
+    color: var(--color-accent-gold);
+    margin-bottom: var(--spacing-2xl);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .ritual-philosophy-content {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-2xl);
+  }
+  
+  .ritual-philosophy-button {
+    background: var(--color-accent-gold);
+    color: var(--color-dark-bg);
+    padding: var(--spacing-md) var(--spacing-2xl);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-base);
+  }
+  
+  .ritual-philosophy-button:hover {
+    background: var(--color-accent-rose);
+    transform: scale(1.05);
+  }
+  
+  @media (max-width: 768px) {
+    .ritual-philosophy-wrapper {
+      padding: var(--spacing-2xl) var(--spacing-lg);
+    }
+    
+    .ritual-philosophy-title {
+      font-size: 1.8rem;
+    }
+    
+    .ritual-philosophy-content {
+      font-size: 1rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Ritual Philosophy",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Ritual Apothecary"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Content",
+      "default": "Ritual Apothecary is the art of tending the body, spirit, and threshold with plants, beauty, memory, and devotion. Each offering is made as a companion for transition: a way to mark grief, soften survival, honor the body, and remember the sacred inside ordinary life."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Read the Philosophy"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ritual Philosophy"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="ritual-philosophy-wrapper">
+  <div class="ritual-philosophy-container">
+    <h2 class="ritual-philosophy-title">{{ section.settings.title }}</h2>
+    <p class="ritual-philosophy-content">{{ section.settings.content }}</p>
+    {% if section.settings.button_label %}
+      <a href="{{ section.settings.button_url | default: '#' }}" class="ritual-philosophy-button">{{ section.settings.button_label }}</a>
+    {% endif %}
+  </div>
+</div>

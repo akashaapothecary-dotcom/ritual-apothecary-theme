@@ -1,0 +1,109 @@
+{% stylesheet %}
+  .private-support-wrapper {
+    background: var(--color-dark-rose);
+    padding: var(--spacing-3xl) var(--spacing-lg);
+    border: 3px solid var(--color-accent-gold);
+    margin: var(--spacing-3xl) var(--spacing-lg);
+  }
+  
+  .private-support-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .private-support-title {
+    font-size: 2.2rem;
+    color: var(--color-candle-cream);
+    margin-bottom: var(--spacing-lg);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .private-support-content {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--color-bone);
+    margin-bottom: var(--spacing-2xl);
+  }
+  
+  .private-support-button {
+    background: var(--color-candle-cream);
+    color: var(--color-dark-rose);
+    padding: var(--spacing-md) var(--spacing-2xl);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-base);
+  }
+  
+  .private-support-button:hover {
+    background: var(--color-accent-gold);
+    color: var(--color-dark-bg);
+    transform: scale(1.05);
+  }
+  
+  @media (max-width: 768px) {
+    .private-support-wrapper {
+      padding: var(--spacing-2xl) var(--spacing-lg);
+      margin: var(--spacing-2xl) 0;
+    }
+    
+    .private-support-title {
+      font-size: 1.6rem;
+    }
+    
+    .private-support-content {
+      font-size: 0.95rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Private Threshold Support",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Private Threshold Support"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Content",
+      "default": "Some passages ask for more than a product. Private threshold support is for those moving through grief, rupture, rebirth, plant medicine integration, postpartum transformation, ancestral remembering, or a season where the old life has ended but the new one has not yet arrived."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Apply for Private Support"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Private Threshold Support"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="private-support-wrapper">
+  <div class="private-support-container">
+    <h2 class="private-support-title">{{ section.settings.title }}</h2>
+    <p class="private-support-content">{{ section.settings.content }}</p>
+    {% if section.settings.button_label %}
+      <a href="{{ section.settings.button_url | default: '#' }}" class="private-support-button">{{ section.settings.button_label }}</a>
+    {% endif %}
+  </div>
+</div>
